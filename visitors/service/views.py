@@ -11,7 +11,7 @@ from visitors.service.serializers import VisitorSerializer
 class VisitorAPI(APIView):
 
     def get(self, request):
-        qs = Visitor.objects.order_by('-timestamp')
+        qs = Visitor.objects.order_by('-timestamp')[:10]
         s = VisitorSerializer(qs, many=True)
         return Response(s.data)
 
