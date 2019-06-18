@@ -88,11 +88,40 @@ CORS_ORIGIN_REGEX_WHITELIST = (
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'MYSQL_DATABASE' in os.environ:
+    name = os.environ['MYSQL_DATABASE']
+    username = os.environ.get('MYSQL_USERNAME', 'visitors')
+    password = os.environ.get('MYSQL_PASSWORD', 'visitors')
+    host = os.environ.get('MYSQL_SERVICE_HOST', 'mysql')
+    port = os.environ.get('MYSQL_SERVICE_PORT', '3306')
+
+    database = {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': name,
+        'USER': username,
+        'PASSWORD': password,
+        'HOST': host,
+        'PORT': port,
     }
+
+    print('Configuring MySQL:')
+    print('  Database: %s' % name)
+    print('  Username: %s' % username)
+    print('  Host: %s' % host)
+    print('  Port: %s' % port)
+
+else:
+    database = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+    }
+    print('Configuring sqlite:')
+    print('  Name: %s' % database['NAME'])
+
+
+
+DATABASES = {
+    'default': database
 }
 
 
