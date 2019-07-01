@@ -78,12 +78,6 @@ WSGI_APPLICATION = 'visitors.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-)
-CORS_ORIGIN_REGEX_WHITELIST = (
-    'localhost:3000',
-)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
