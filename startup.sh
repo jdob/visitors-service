@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for i in {1..10}
+for i in {1..50}
 do
     echo "Migrating Database..."
     python manage.py migrate
